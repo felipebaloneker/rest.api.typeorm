@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  rest_typeorm_db:
+    container_name: rest_typeorm_db
+    image: postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_PASSWORD: "12345"
+      POSTGRES_DB: 'rest-typeorm'
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+
+  # rest_typeorm_api:
+  #   container_name: rest_typeorm_api
+  #   restart: unless-stopped
+  #   build: 
+  #     context: .
+  #     dockerfile: dockerfile
+  #   ports:
+  #     - 3000:3000
+  #   command: yarn start
+  #   depends_on:
+  #     - rest_typeorm_db
+volumes:
+  postgres_volume:
